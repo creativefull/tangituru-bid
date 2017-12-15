@@ -32,7 +32,7 @@ let openOrder = async () => {
 			if (info.success == 1) {
 				return resolve(info.return.orders)
 			} else {
-				sendMessage('Error get open order', info)
+				sendMessage('Error get open order' + info)
 				return reject('Error get open order', info)
 			}
 		}).catch(reject)
@@ -59,7 +59,7 @@ let trade = async (type, rate, total, curr) => {
 }
 
 let run = () => {
-	getTicker('eth_idr').then(async (text) => {
+	getTicker('btc_idr').then(async (text) => {
 		if (text) {
 			let lastVIP = parseFloat(text.ticker.last)
 			console.log(lastVIP)
@@ -123,11 +123,12 @@ let run = () => {
 		}
 		run()
 	}).catch((e) => {
+		sendMessage('Error get ticker' + e)
 		console.error(e)
 	})
 }
 
-sendMessage(new Date(), 'Robot berjalan dengan api key:', process.env.VIP_KEY, 'dan secret key:', process.env.SECRET_KEY)
+sendMessage(new Date() + 'Robot berjalan dengan api key: ' + process.env.VIP_KEY + 'dan secret key: ' + process.env.SECRET_KEY)
 getBalance().then((balance) => {
 	console.log("Done get btc balance")
 	btcBalance = parseFloat(balance.btc)
