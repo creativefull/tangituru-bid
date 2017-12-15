@@ -17,10 +17,11 @@ let minimumBuyIDR = 50000
 let pair = 'btc_idr'
 
 let getBalance = async () => {
-	console.log("Get Balance")
 	return new Promise((resolve, reject) => {
+		sendMessage('Mengambil info saldo')
 		requestAPI('getInfo').then((info) => {
 			if (info.success == 1) {
+				sendMessage(JSON.stringify(info.return.balance))
 				return resolve(info.return.balance)
 			}
 		}).catch(reject)
