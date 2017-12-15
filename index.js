@@ -17,6 +17,7 @@ let minimumBuyIDR = 50000
 let pair = 'btc_idr'
 
 let getBalance = async () => {
+	console.log("Get Balance")
 	return new Promise((resolve, reject) => {
 		requestAPI('getInfo').then((info) => {
 			if (info.success == 1) {
